@@ -16,7 +16,7 @@ if (Test-Path $version) {
     New-Item $version$postfix -type directory
     Copy-Item $version\* $version$postfix -Recurse
     Set-Location -Path $version$postfix
-    & "jar" xf ($version + ".jar") $classfile
+    jar xf $version".jar" $classfile
     $bytes = [System.IO.File]::ReadAllBytes($env:APPDATA + "\.minecraft\versions\" + $version + $postfix + "\" + $classfile);
     $bytes[$offset] = $newvalue;
     [System.IO.File]::WriteAllBytes($env:APPDATA + "\.minecraft\versions\" + $version + $postfix + "\" + $classfile, $bytes);
@@ -27,9 +27,13 @@ if (Test-Path $version) {
     $out='  "id": "' + $version + $postfix + '",'
     (Get-Content $version".json") -replace $in, $out | Set-Content $version$postfix".json"
     Remove-Item $version".json"
+    Write-Host Done!
   }
 }
 else
 {
   Write-Host Folder $version not found
 }
+Write-Host -NoNewLine "Press any key to continue..."
+$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+
