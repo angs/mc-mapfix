@@ -7,4 +7,8 @@ Fix for map markers disappearing in version 1.8
 
 Windows users might run into Execution policy errors. In this case launch the script with e.g.
 
+```
 powershell.exe -ExecutionPolicy Unrestricted -File "%UserProfile%\Downloads\mapfix_installer.ps1" 
+```
+
+External dependencies: Java JDK for the jar tool or optionally 7-zip Command Line Version for the Windows version
